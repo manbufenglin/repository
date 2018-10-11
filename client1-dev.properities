@@ -1,0 +1,29 @@
+server.port=8001
+spring.application.name=client1
+
+eureka.client.register-with-eureka=true
+eureka.client.fetch-registry=true
+
+#安全认证
+register.server.user.name=username
+register.server.user.password=password
+eureka.client.service-url.defaultZone=http://${register.server.user.name}:${register.server.user.password}@127.0.0.1:9001/eureka/,http://${register.server.user.name}:${register.server.user.password}@127.0.0.1:9000/eureka/
+
+
+#注册中心实例名称
+eureka.instance.appname=client1
+#实例以ip地址展示
+eureka.instance.prefer-ip-address=true
+#注册中心实例hostname 设置为ip
+eureka.instance.hostname=${spring.cloud.client.ipAddress}
+#实例id 以 IP地址+服务端口号
+eureka.instance.instance-id=${spring.cloud.client.ipAddress}:${server.port}
+
+
+request.service.name.service1=eurekaService1
+
+feign.hystrix.enabled=true
+#链路收集器服务地址
+#spring.zipkin.base-url=http://zipkin-server:9411
+#搜集比例
+#spring.sleuth.sampler.percentage=0.2
